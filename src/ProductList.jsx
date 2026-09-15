@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import './ProductList.css'
+import React, { useState } from 'react';
+import './ProductList.css';
 import CartItem from './CartItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from './CartSlice';
+
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
-    const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
+
+    const dispatch = useDispatch();
+
+    // Get cart items from Redux store
+    const cartItems = useSelector((state) => state.cart.items);
 
     const plantsArray = [
         {
@@ -47,6 +54,7 @@ function ProductList({ onHomeClick }) {
                 }
             ]
         },
+
         {
             category: "Aromatic Fragrant Plants",
             plants: [
@@ -83,18 +91,19 @@ function ProductList({ onHomeClick }) {
                 {
                     name: "Hyacinth",
                     image: "https://cdn.pixabay.com/photo/2019/04/07/20/20/hyacinth-4110726_1280.jpg",
-                    description: "Hyacinth is a beautiful flowering plant known for its fragrant.",
+                    description: "Hyacinth is a beautiful flowering plant known for its fragrance.",
                     cost: "$22"
                 }
             ]
         },
+
         {
             category: "Insect Repellent Plants",
             plants: [
                 {
-                    name: "oregano",
+                    name: "Oregano",
                     image: "https://cdn.pixabay.com/photo/2015/05/30/21/20/oregano-790702_1280.jpg",
-                    description: "The oregano plants contains compounds that can deter certain insects.",
+                    description: "Oregano contains compounds that can deter certain insects.",
                     cost: "$10"
                 },
                 {
@@ -129,6 +138,7 @@ function ProductList({ onHomeClick }) {
                 }
             ]
         },
+
         {
             category: "Medicinal Plants",
             plants: [
@@ -170,6 +180,7 @@ function ProductList({ onHomeClick }) {
                 }
             ]
         },
+
         {
             category: "Low Maintenance Plants",
             plants: [
@@ -212,74 +223,244 @@ function ProductList({ onHomeClick }) {
             ]
         }
     ];
+
+    // Navbar styles
     const styleObj = {
         backgroundColor: '#4CAF50',
-        color: '#fff!important',
+        color: 'white',
         padding: '15px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignIems: 'center',
+        alignItems: 'center',
         fontSize: '20px',
-    }
+    };
+
     const styleObjUl = {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '1100px',
-    }
+        width: '500px',
+    };
+
     const styleA = {
         color: 'white',
-        fontSize: '30px',
+        fontSize: '24px',
         textDecoration: 'none',
-    }
+    };
 
+    // Calculate total number of items in cart
+    const cartItemCount = cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+
+    // Home button
     const handleHomeClick = (e) => {
         e.preventDefault();
+        setShowCart(false);
         onHomeClick();
     };
 
-    const handleCartClick = (e) => {
-        e.preventDefault();
-        setShowCart(true); // Set showCart to true when cart icon is clicked
-    };
+    // Plants button
     const handlePlantsClick = (e) => {
-        e.preventDefault();
-        setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
-        setShowCart(false); // Hide the cart when navigating to About Us
-    };
-
-    const handleContinueShopping = (e) => {
         e.preventDefault();
         setShowCart(false);
     };
+
+    // Cart button
+    const handleCartClick = (e) => {
+        e.preventDefault();
+        setShowCart(true);
+    };
+
+    // Continue shopping button
+    const handleContinueShopping = () => {
+        setShowCart(false);
+    };
+
+    // Add product to cart
+    const handleAddToCart = (plant) => {
+        dispatch(addItem(plant));
+    };
+
+    // Check if product is already in cart
+    const isInCart = (plantName) => {
+        return cartItems.some(
+            (item) => item.name === plantName
+        );
+    };
+
     return (
         <div>
+
+            {/* NAVBAR */}
             <div className="navbar" style={styleObj}>
+
                 <div className="tag">
+
                     <div className="luxury">
-                        <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-                        <a href="/" onClick={(e) => handleHomeClick(e)}>
+
+                        <img
+                            src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png"
+                            alt="Paradise Nursery"
+                        />
+
+                        <a
+                            href="/"
+                            onClick={handleHomeClick}
+                        >
                             <div>
-                                <h3 style={{ color: 'white' }}>Paradise Nursery</h3>
-                                <i style={{ color: 'white' }}>Where Green Meets Serenity</i>
+                                <h3 style={{ color: 'white' }}>
+                                    Paradise Nursery
+                                </h3>
+
+                                <i style={{ color: 'white' }}>
+                                    Where Green Meets Serenity
+                                </i>
                             </div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {/* NAVIGATION LINKS */}
+                <div style={styleObjUl}>
+
+                    <div>
+                        <a
+                            href="#"
+                            onClick={handleHomeClick}
+                            style={styleA}
+                        >
+                            Home
+                        </a>
+                    </div>
+
+                    <div>
+                        <a
+                            href="#"
+                            onClick={handlePlantsClick}
+                            style={styleA}
+                        >
+                            Plants
+                        </a>
+                    </div>
+
+                    <div>
+                        <a
+                            href="#"
+                            onClick={handleCartClick}
+                            style={styleA}
+                        >
+                            <span>Cart 🛒</span>
+
+                            <span className="cart_quantity_count">
+                                {cartItemCount}
+                            </span>
                         </a>
                     </div>
 
                 </div>
-                <div style={styleObjUl}>
-                    <div> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
-                    <div> <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}><h1 className='cart'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68"><rect width="156" height="156" fill="none"></rect><circle cx="80" cy="216" r="12"></circle><circle cx="184" cy="216" r="12"></circle><path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path></svg></h1></a></div>
-                </div>
+
             </div>
+
+            {/* PRODUCT LIST OR CART */}
             {!showCart ? (
+
                 <div className="product-grid">
 
+                    {plantsArray.map((category) => (
+
+                        <div
+                            className="plant-category"
+                            key={category.category}
+                        >
+
+                            {/* CATEGORY HEADING */}
+                            <div className="plantname_heading">
+
+                                <h2 className="plant_heading">
+                                    {category.category}
+                                </h2>
+
+                            </div>
+
+                            {/* PRODUCTS */}
+                            <div className="product-list">
+
+                                {category.plants.map((plant) => {
+
+                                    const added = isInCart(plant.name);
+
+                                    return (
+
+                                        <div
+                                            className="product-card"
+                                            key={`${category.category}-${plant.name}`}
+                                        >
+
+                                            {/* PLANT IMAGE */}
+                                            <img
+                                                className="product-image"
+                                                src={plant.image}
+                                                alt={plant.name}
+                                            />
+
+                                            {/* PLANT NAME */}
+                                            <h3 className="product-title">
+                                                {plant.name}
+                                            </h3>
+
+                                            {/* DESCRIPTION */}
+                                            <p>
+                                                {plant.description}
+                                            </p>
+
+                                            {/* PRICE */}
+                                            <p className="product-price">
+                                                {plant.cost}
+                                            </p>
+
+                                            {/* ADD TO CART */}
+                                            <button
+                                                className={`product-button ${
+                                                    added
+                                                        ? 'added-to-cart'
+                                                        : ''
+                                                }`}
+                                                onClick={() =>
+                                                    handleAddToCart(plant)
+                                                }
+                                                disabled={added}
+                                            >
+                                                {added
+                                                    ? 'Added to Cart'
+                                                    : 'Add to Cart'}
+                                            </button>
+
+                                        </div>
+
+                                    );
+
+                                })}
+
+                            </div>
+
+                        </div>
+
+                    ))}
 
                 </div>
+
             ) : (
-                <CartItem onContinueShopping={handleContinueShopping} />
+
+                <CartItem
+                    onContinueShopping={handleContinueShopping}
+                />
+
             )}
+
         </div>
     );
 }
