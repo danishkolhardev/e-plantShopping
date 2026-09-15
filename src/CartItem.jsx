@@ -1,27 +1,38 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
+import {
+    removeItem,
+    updateQuantity
+} from './CartSlice';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
-    const cartItems = useSelector((state) => state.cart.items);
+
+    const cartItems = useSelector(
+        (state) => state.cart.items
+    );
+
     const dispatch = useDispatch();
 
-    // Calculate total amount of all items in cart
+    // Calculate total cart amount
     const calculateTotalAmount = () => {
+
         return cartItems
             .reduce((total, item) => {
+
                 const price = parseFloat(
                     item.cost.replace('$', '')
                 );
 
                 return total + price * item.quantity;
+
             }, 0)
             .toFixed(2);
     };
 
-    // Calculate total cost of one particular item
+    // Calculate total cost of one item
     const calculateTotalCost = (item) => {
+
         const price = parseFloat(
             item.cost.replace('$', '')
         );
@@ -31,6 +42,7 @@ const CartItem = ({ onContinueShopping }) => {
 
     // Increase quantity
     const handleIncrement = (item) => {
+
         dispatch(
             updateQuantity({
                 name: item.name,
@@ -41,7 +53,9 @@ const CartItem = ({ onContinueShopping }) => {
 
     // Decrease quantity
     const handleDecrement = (item) => {
+
         if (item.quantity > 1) {
+
             dispatch(
                 updateQuantity({
                     name: item.name,
@@ -51,42 +65,52 @@ const CartItem = ({ onContinueShopping }) => {
         }
     };
 
-    // Remove item from cart
+    // Delete item
     const handleRemove = (item) => {
-        dispatch(removeItem(item.name));
+
+        dispatch(
+            removeItem(item.name)
+        );
     };
 
     // Continue shopping
     const handleContinueShopping = (e) => {
+
         e.preventDefault();
+
         onContinueShopping();
     };
 
     // Checkout
     const handleCheckout = () => {
+
         alert('Coming Soon');
     };
 
     return (
+
         <div className="cart-container">
 
-            {/* Cart heading */}
+            {/* TOTAL CART AMOUNT */}
             <h2 style={{ color: 'black' }}>
-                Total Cart Amount: ${calculateTotalAmount()}
+                Total Cart Amount: $
+                {calculateTotalAmount()}
             </h2>
 
-            {/* Empty cart */}
+            {/* EMPTY CART */}
             {cartItems.length === 0 ? (
 
                 <div>
+
                     <h3 style={{ color: 'black' }}>
                         Your cart is empty.
                     </h3>
+
                 </div>
 
             ) : (
 
-                /* Cart items */
+                /* CART ITEMS */
                 cartItems.map((item) => (
 
                     <div
@@ -94,7 +118,7 @@ const CartItem = ({ onContinueShopping }) => {
                         key={item.name}
                     >
 
-                        {/* Plant image */}
+                        {/* IMAGE */}
                         <img
                             className="cart-item-image"
                             src={item.image}
@@ -103,17 +127,17 @@ const CartItem = ({ onContinueShopping }) => {
 
                         <div className="cart-item-details">
 
-                            {/* Plant name */}
+                            {/* NAME */}
                             <div className="cart-item-name">
                                 {item.name}
                             </div>
 
-                            {/* Unit price */}
+                            {/* UNIT PRICE */}
                             <div className="cart-item-cost">
                                 Unit Price: {item.cost}
                             </div>
 
-                            {/* Quantity controls */}
+                            {/* QUANTITY */}
                             <div className="cart-item-quantity">
 
                                 <button
@@ -121,7 +145,6 @@ const CartItem = ({ onContinueShopping }) => {
                                     onClick={() =>
                                         handleDecrement(item)
                                     }
-                                    disabled={item.quantity <= 1}
                                 >
                                     -
                                 </button>
@@ -141,12 +164,13 @@ const CartItem = ({ onContinueShopping }) => {
 
                             </div>
 
-                            {/* Total cost for this plant */}
+                            {/* ITEM TOTAL */}
                             <div className="cart-item-total">
-                                Total: ${calculateTotalCost(item)}
+                                Total: $
+                                {calculateTotalCost(item)}
                             </div>
 
-                            {/* Delete */}
+                            {/* DELETE */}
                             <button
                                 className="cart-item-delete"
                                 onClick={() =>
@@ -164,7 +188,7 @@ const CartItem = ({ onContinueShopping }) => {
 
             )}
 
-            {/* Cart buttons */}
+            {/* BUTTONS */}
             <div className="continue_shopping_btn">
 
                 <button

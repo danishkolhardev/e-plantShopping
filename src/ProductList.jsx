@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
 
 function ProductList({ onHomeClick }) {
+
     const [showCart, setShowCart] = useState(false);
 
     const dispatch = useDispatch();
 
-    // Get cart items from Redux store
-    const cartItems = useSelector((state) => state.cart.items);
+    const cartItems = useSelector(
+        (state) => state.cart.items
+    );
 
     const plantsArray = [
         {
@@ -60,13 +62,13 @@ function ProductList({ onHomeClick }) {
             plants: [
                 {
                     name: "Lavender",
-                    image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop",
                     description: "Calming scent, used in aromatherapy.",
                     cost: "$20"
                 },
                 {
                     name: "Jasmine",
-                    image: "https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    image: "https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?q=80&w=1170&auto=format&fit=crop",
                     description: "Sweet fragrance, promotes relaxation.",
                     cost: "$18"
                 },
@@ -91,7 +93,7 @@ function ProductList({ onHomeClick }) {
                 {
                     name: "Hyacinth",
                     image: "https://cdn.pixabay.com/photo/2019/04/07/20/20/hyacinth-4110726_1280.jpg",
-                    description: "Hyacinth is a beautiful flowering plant known for its fragrance.",
+                    description: "Beautiful flowering plant known for its fragrance.",
                     cost: "$22"
                 }
             ]
@@ -103,31 +105,31 @@ function ProductList({ onHomeClick }) {
                 {
                     name: "Oregano",
                     image: "https://cdn.pixabay.com/photo/2015/05/30/21/20/oregano-790702_1280.jpg",
-                    description: "Oregano contains compounds that can deter certain insects.",
+                    description: "Contains compounds that can deter certain insects.",
                     cost: "$10"
                 },
                 {
                     name: "Marigold",
                     image: "https://cdn.pixabay.com/photo/2022/02/22/05/45/marigold-7028063_1280.jpg",
-                    description: "Natural insect repellent, also adds color to the garden.",
+                    description: "Natural insect repellent and adds color to the garden.",
                     cost: "$8"
                 },
                 {
                     name: "Geraniums",
                     image: "https://cdn.pixabay.com/photo/2012/04/26/21/51/flowerpot-43270_1280.jpg",
-                    description: "Known for their insect-repelling properties while adding a pleasant scent.",
+                    description: "Known for insect-repelling properties.",
                     cost: "$20"
                 },
                 {
                     name: "Basil",
                     image: "https://cdn.pixabay.com/photo/2016/07/24/20/48/tulsi-1539181_1280.jpg",
-                    description: "Repels flies and mosquitoes, also used in cooking.",
+                    description: "Repels flies and mosquitoes and is used in cooking.",
                     cost: "$9"
                 },
                 {
                     name: "Lavender",
-                    image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    description: "Calming scent, used in aromatherapy.",
+                    image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop",
+                    description: "Calming scent and natural insect repellent.",
                     cost: "$20"
                 },
                 {
@@ -151,7 +153,7 @@ function ProductList({ onHomeClick }) {
                 {
                     name: "Echinacea",
                     image: "https://cdn.pixabay.com/photo/2014/12/05/03/53/echinacea-557477_1280.jpg",
-                    description: "Boosts immune system, helps fight colds.",
+                    description: "Helps support the immune system.",
                     cost: "$16"
                 },
                 {
@@ -175,7 +177,7 @@ function ProductList({ onHomeClick }) {
                 {
                     name: "Calendula",
                     image: "https://cdn.pixabay.com/photo/2019/07/15/18/28/flowers-4340127_1280.jpg",
-                    description: "Heals wounds and soothes skin irritations.",
+                    description: "Helps heal wounds and soothe skin irritation.",
                     cost: "$12"
                 }
             ]
@@ -186,20 +188,20 @@ function ProductList({ onHomeClick }) {
             plants: [
                 {
                     name: "ZZ Plant",
-                    image: "https://images.unsplash.com/photo-1632207691143-643e2a9a9361?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    image: "https://images.unsplash.com/photo-1632207691143-643e2a9a9361?q=80&w=464&auto=format&fit=crop",
                     description: "Thrives in low light and requires minimal watering.",
                     cost: "$25"
                 },
                 {
                     name: "Pothos",
                     image: "https://cdn.pixabay.com/photo/2018/11/15/10/32/plants-3816945_1280.jpg",
-                    description: "Tolerates neglect and can grow in various conditions.",
+                    description: "Tolerates neglect and grows in various conditions.",
                     cost: "$10"
                 },
                 {
                     name: "Snake Plant",
                     image: "https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg",
-                    description: "Needs infrequent watering and is resilient to most pests.",
+                    description: "Needs infrequent watering and is very resilient.",
                     cost: "$15"
                 },
                 {
@@ -211,20 +213,19 @@ function ProductList({ onHomeClick }) {
                 {
                     name: "Succulents",
                     image: "https://cdn.pixabay.com/photo/2016/11/21/16/05/cacti-1846147_1280.jpg",
-                    description: "Drought-tolerant plants with unique shapes and colors.",
+                    description: "Drought-tolerant plants with unique shapes.",
                     cost: "$18"
                 },
                 {
                     name: "Aglaonema",
                     image: "https://cdn.pixabay.com/photo/2014/10/10/04/27/aglaonema-482915_1280.jpg",
-                    description: "Requires minimal care and adds color to indoor spaces.",
+                    description: "Requires minimal care and adds color indoors.",
                     cost: "$22"
                 }
             ]
         }
     ];
 
-    // Navbar styles
     const styleObj = {
         backgroundColor: '#4CAF50',
         color: 'white',
@@ -232,58 +233,61 @@ function ProductList({ onHomeClick }) {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        fontSize: '20px',
+        fontSize: '20px'
     };
 
     const styleObjUl = {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '500px',
+        width: '500px'
     };
 
     const styleA = {
         color: 'white',
         fontSize: '24px',
-        textDecoration: 'none',
+        textDecoration: 'none'
     };
 
-    // Calculate total number of items in cart
+    // Calculate cart item count
     const cartItemCount = cartItems.reduce(
         (total, item) => total + item.quantity,
         0
     );
 
-    // Home button
+    // Home
     const handleHomeClick = (e) => {
         e.preventDefault();
         setShowCart(false);
-        onHomeClick();
+
+        if (onHomeClick) {
+            onHomeClick();
+        }
     };
 
-    // Plants button
+    // Plants
     const handlePlantsClick = (e) => {
         e.preventDefault();
         setShowCart(false);
     };
 
-    // Cart button
+    // Cart
     const handleCartClick = (e) => {
         e.preventDefault();
         setShowCart(true);
     };
 
-    // Continue shopping button
+    // Continue shopping
     const handleContinueShopping = () => {
         setShowCart(false);
     };
 
-    // Add product to cart
+    // Add item
     const handleAddToCart = (plant) => {
         dispatch(addItem(plant));
     };
 
-    // Check if product is already in cart
+    // Check whether item has already been added
     const isInCart = (plantName) => {
         return cartItems.some(
             (item) => item.name === plantName
@@ -324,7 +328,7 @@ function ProductList({ onHomeClick }) {
 
                 </div>
 
-                {/* NAVIGATION LINKS */}
+                {/* NAVIGATION */}
                 <div style={styleObjUl}>
 
                     <div>
@@ -353,11 +357,7 @@ function ProductList({ onHomeClick }) {
                             onClick={handleCartClick}
                             style={styleA}
                         >
-                            <span>Cart 🛒</span>
-
-                            <span className="cart_quantity_count">
-                                {cartItemCount}
-                            </span>
+                            Cart 🛒 {cartItemCount}
                         </a>
                     </div>
 
@@ -365,7 +365,7 @@ function ProductList({ onHomeClick }) {
 
             </div>
 
-            {/* PRODUCT LIST OR CART */}
+            {/* PRODUCT LIST */}
             {!showCart ? (
 
                 <div className="product-grid">
@@ -377,7 +377,6 @@ function ProductList({ onHomeClick }) {
                             key={category.category}
                         >
 
-                            {/* CATEGORY HEADING */}
                             <div className="plantname_heading">
 
                                 <h2 className="plant_heading">
@@ -386,7 +385,6 @@ function ProductList({ onHomeClick }) {
 
                             </div>
 
-                            {/* PRODUCTS */}
                             <div className="product-list">
 
                                 {category.plants.map((plant) => {
@@ -400,29 +398,24 @@ function ProductList({ onHomeClick }) {
                                             key={`${category.category}-${plant.name}`}
                                         >
 
-                                            {/* PLANT IMAGE */}
                                             <img
                                                 className="product-image"
                                                 src={plant.image}
                                                 alt={plant.name}
                                             />
 
-                                            {/* PLANT NAME */}
                                             <h3 className="product-title">
                                                 {plant.name}
                                             </h3>
 
-                                            {/* DESCRIPTION */}
                                             <p>
                                                 {plant.description}
                                             </p>
 
-                                            {/* PRICE */}
                                             <p className="product-price">
                                                 {plant.cost}
                                             </p>
 
-                                            {/* ADD TO CART */}
                                             <button
                                                 className={`product-button ${
                                                     added
@@ -442,7 +435,6 @@ function ProductList({ onHomeClick }) {
                                         </div>
 
                                     );
-
                                 })}
 
                             </div>
@@ -456,7 +448,9 @@ function ProductList({ onHomeClick }) {
             ) : (
 
                 <CartItem
-                    onContinueShopping={handleContinueShopping}
+                    onContinueShopping={
+                        handleContinueShopping
+                    }
                 />
 
             )}
